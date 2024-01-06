@@ -20,8 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </h1>
           <Listbox color="primary" variant="flat">
             <ListboxSection title="Trend" showDivider>
-              <ListboxItem key="new" href="/">
-                <span className={pathname === '/' ? 'text-primary' : ''}>New</span>
+              <ListboxItem key="new" href="/new">
+                <span className={pathname === '/new' ? 'text-primary' : ''}>New</span>
               </ListboxItem>
               <ListboxItem key="top" href="/top">
                 <span className={pathname === '/top' ? 'text-primary' : ''}>Top</span>
