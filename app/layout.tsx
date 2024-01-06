@@ -1,13 +1,20 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { Listbox, ListboxSection, ListboxItem } from '@nextui-org/listbox'
+import { Listbox, ListboxSection, ListboxItem, Button } from '@nextui-org/react'
 import { Providers } from './providers'
 import '@/styles/tailwind.css'
 import '@/styles/globals.css'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+
+  const [colorMode, setColorMode] = useState<'light' | 'dark'>('light')
+  const toggleColorMode = () => (colorMode === 'light' ? setColorMode('dark') : setColorMode('light'))
+  useEffect(() => {
+    document.documentElement.className = colorMode
+  }, [colorMode])
 
   return (
     <html lang="en" className="light">
@@ -43,9 +50,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </ListboxSection>
           </Listbox>
         </aside>
-        <main className="flex-1">
-          <Providers>{children}</Providers>
-        </main>
+        <div className="flex-1 flex flex-col">
+          <div className="h-12 p-1 bg-default-100 flex flex-row-reverse">
+            <Button variant="light" onClick={toggleColorMode}>
+              {colorMode === 'light' ? 'Dark' : 'Light'} Mode
+            </Button>
+          </div>
+          <main className="flex-1 p-2">
+            <Providers>{children}</Providers>
+          </main>
+        </div>
       </body>
     </html>
   )
