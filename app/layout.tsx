@@ -1,4 +1,4 @@
-import TopBar from '@/components/Topbar'
+import TopBar from '@/components/TopBar'
 import SideBar from '@/components/SideBar'
 import { Providers } from './providers'
 import '@/styles/tailwind.css'
