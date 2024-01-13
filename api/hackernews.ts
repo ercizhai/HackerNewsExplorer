@@ -1,3 +1,5 @@
+import { getSubListByPage, PageQuery } from '@/utils'
+
 export type StoryListLabel = 'new' | 'top' | 'best' | 'ask' | 'job' | 'show'
 
 export interface Item {
@@ -56,14 +58,23 @@ const request = async (url: string) => {
   return response.json()
 }
 
-export const getStories = async (label: StoryListLabel): Promise<number[]> => {
-  return request(`${baseUrl}/${label}stories.json`)
-}
-
 export const getItem = async <T extends Item>(id: number): Promise<T> => {
   return request(`${baseUrl}/item/${id}.json`)
 }
 
 export const getUser = async (id: string): Promise<User> => {
   return request(`${baseUrl}/user/${id}.json`)
+}
+
+export const getStories = async (label: StoryListLabel, query: PageQuery): Promise<Item[]> => {
+  const all = await request(`${baseUrl}/${label}stories.json`)
+  const ids = getSubListByPage<number>(all, query)
+
+  const stories: Item[] = []
+  for await (const id of ids) {
+    const result = await getItem(id)
+    stories.push(result)
+  }
+
+  return stories
 }

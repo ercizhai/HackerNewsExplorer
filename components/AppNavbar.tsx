@@ -45,7 +45,7 @@ export default function AppNavbar() {
   }, [colorMode])
 
   return (
-    <Navbar className="w-full">
+    <Navbar className="w-full" shouldHideOnScroll>
       <NavbarBrand>
         <h1 className="text-success text-2xl font-bold">HackerNews Explorer</h1>
       </NavbarBrand>
