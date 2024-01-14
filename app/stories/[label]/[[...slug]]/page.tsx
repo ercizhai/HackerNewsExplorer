@@ -1,4 +1,5 @@
-import { Item, getStories } from '@/api/hackernews'
+import { Item, Story, getStories } from '@/api/hackernews'
+import StoryCard from '@/components/StoryCard'
 import { PageQuery } from '@/utils'
 
 interface Params {
@@ -16,7 +17,7 @@ export default async function Page({ params }: { params: Params }) {
   return (
     <ul>
       {stories.map((story, i) => (
-        <pre key={i}>{JSON.stringify(story, null, 2)}</pre>
+        <StoryCard key={story.id} story={story as Story} />
       ))}
     </ul>
   )

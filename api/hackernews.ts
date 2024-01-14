@@ -7,7 +7,7 @@ export interface Item {
   deleted?: boolean
   type: 'job' | 'story' | 'comment' | 'poll' | 'pollopt'
   by: string
-  text: string
+  text?: string
   time: number
   dead?: boolean
   kids: number[]
@@ -20,7 +20,7 @@ export interface Job extends Item {
 }
 
 export interface Story extends Item {
-  url: string
+  url?: string
   score: number
   title: string
   descendants: number
