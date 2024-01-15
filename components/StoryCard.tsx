@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardBody, CardFooter, Link, Divider } from '@nextui-org/react'
+import { RiTimeLine, RiUserLine, RiChat2Line, RiFireLine } from 'react-icons/ri'
 import { Story } from '@/api/hackernews'
 
 function formatTime(timestamp: number): string {
@@ -14,19 +15,37 @@ function formatTime(timestamp: number): string {
 
 export default function StoryCard({ story }: { story: Story }) {
   return (
-    <Card className="my-4">
-      <CardHeader>
-        <h2 className="text-xl text-default-700 font-bold">
-          {story.type}: {story.title}
+    <Card className="my-4" isBlurred>
+      <CardHeader className="flex-col items-start">
+        <h2>
+          <Link color="success" className="text-xl font-bold">
+            {story.type}: {story.title}
+          </Link>
         </h2>
-      </CardHeader>
-      <CardBody>
-        {story.text ? <p dangerouslySetInnerHTML={{ __html: story.text }}></p> : null}
-        <p className="mt-4 text-right">
-          Author: {story.by}&emsp;Score: {story.score}&emsp;
-          {story.descendants ? <span>Comment: {story.descendants}&emsp;</span> : null}Time: {formatTime(story.time)}
+        <p className="mt-1 flex items-center text-default-500">
+          <RiUserLine />
+          &nbsp;
+          {story.by}&emsp;
+          <RiFireLine />
+          &nbsp;
+          {story.score}&emsp;
+          {story.descendants ? (
+            <>
+              <RiChat2Line />
+              &nbsp;
+              {story.descendants}&emsp;
+            </>
+          ) : null}
+          <RiTimeLine />
+          &nbsp;
+          {formatTime(story.time)}
         </p>
-      </CardBody>
+      </CardHeader>
+      {story.text ? (
+        <CardBody>
+          <p dangerouslySetInnerHTML={{ __html: story.text }}></p>
+        </CardBody>
+      ) : null}
       {story.url ? (
         <>
           <Divider />

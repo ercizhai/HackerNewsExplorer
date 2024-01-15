@@ -38,7 +38,7 @@ export default function AppNavbar() {
     },
   ]
   const pathname = usePathname()
-  const [colorMode, setColorMode] = useState<'light' | 'dark'>('light')
+  const [colorMode, setColorMode] = useState<'light' | 'dark'>('dark')
   const toggleColorMode = () => (colorMode === 'light' ? setColorMode('dark') : setColorMode('light'))
   useEffect(() => {
     document.documentElement.className = colorMode
