@@ -52,7 +52,7 @@ export default function AppNavbar() {
       <NavbarContent justify="center">
         {nav.map(item => (
           <NavbarItem key={item.key}>
-            <Link href={item.href} color={pathname === item.href ? 'success' : 'foreground'}>
+            <Link href={item.href} color={pathname.startsWith(item.href) ? 'success' : 'foreground'}>
               {item.text}
             </Link>
           </NavbarItem>

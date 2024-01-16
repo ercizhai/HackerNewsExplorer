@@ -66,8 +66,11 @@ export const getUser = async (id: string): Promise<User> => {
   return request(`${baseUrl}/user/${id}.json`)
 }
 
-export const getStories = async (label: StoryListLabel, query: PageQuery): Promise<Item[]> => {
-  const all = await request(`${baseUrl}/${label}stories.json`)
+export const getStories = async (
+  label: StoryListLabel,
+  query: PageQuery
+): Promise<{ stories: Item[]; page: number; totalPage: number }> => {
+  const all: number[] = await request(`${baseUrl}/${label}stories.json`)
   const ids = getSubListByPage<number>(all, query)
 
   const stories: Item[] = []
@@ -76,5 +79,9 @@ export const getStories = async (label: StoryListLabel, query: PageQuery): Promi
     stories.push(result)
   }
 
-  return stories
+  return {
+    stories,
+    page: query.page || 1,
+    totalPage: Math.ceil(all.length / (query.pageSize || 10)),
+  }
 }

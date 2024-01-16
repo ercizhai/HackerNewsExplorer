@@ -50,7 +50,7 @@ export default function StoryCard({ story }: { story: Story }) {
         <>
           <Divider />
           <CardFooter className="flex justify-end">
-            <Link href={story.url} target="_blank" color="success">
+            <Link href={story.url} target="_blank" color="success" size="sm">
               View Source
             </Link>
           </CardFooter>
