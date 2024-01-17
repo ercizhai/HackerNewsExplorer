@@ -18,7 +18,7 @@ export default function StoryCard({ story }: { story: Story }) {
     <Card className="my-4" isBlurred>
       <CardHeader className="flex-col items-start">
         <h2>
-          <Link color="success" className="text-xl font-bold">
+          <Link color="success" className="text-xl font-bold" href={`/view/${story.id}`}>
             {story.type}: {story.title}
           </Link>
         </h2>

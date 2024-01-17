@@ -8,7 +8,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="dark">
       <body className="bg-default-100">
         <AppNavbar />
-        <div className="max-w-[1024px] mx-auto p-6">
+        <div>
           <Providers>{children}</Providers>
         </div>
       </body>
